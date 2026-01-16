@@ -23,11 +23,6 @@ python -m src.simulate --n_sims 20000 --lambda_f 12 --mu 9.0 --sigma 1.0
 python -m src.make_plots
 ```
 
-## Outputs you can talk through
-- **Expected annual loss** (mean of simulated aggregate losses)
-- **VaR / TVaR** at 95% and 99% (tail risk)
-- Shape + heaviness of tail via the tail histogram
-
 ## Notes
 - Parameters are easy to swap to test different lines of business (higher frequency / heavier tail).
 - Next improvements: fit parameters from real data, add reinsurance layers, add inflation/trend.
