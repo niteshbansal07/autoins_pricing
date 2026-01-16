@@ -1,8 +1,33 @@
-# autoins_pricing
+# Loss Modeling & Risk Analytics (Python)
 
-A simulated actuarial pricing project built with Python, demonstrating how key risk factors (age, location, vehicle type, and claims history) can influence premium calculations for auto insurance. Includes basic data generation, visualization, and a regression model for pricing.
+This repo is a compact, end-to-end actuarial-style **frequency–severity** model that produces a simulated
+**aggregate loss distribution** and common **tail risk** metrics.
 
-Whats next in this:
-1. GML with tweedie/ posisson dist
-2. more sophisticated dataset
-3. 
+The goal was to recreate the core logic behind how pricing / risk teams think about:
+- **Frequency** (how often claims happen)
+- **Severity** (how big claims are)
+- **Aggregate loss** (total annual loss)
+- **Tail risk** (VaR / TVaR)
+
+## What’s inside
+- `src/simulate.py` – Poisson frequency + Lognormal severity, Monte Carlo aggregate losses
+- `src/risk_metrics.py` – VaR/TVaR and summary helpers
+- `src/make_plots.py` – quick plots for distribution + tail
+- `data/` – generated outputs (`aggregate_losses.csv`, `report.json`)
+- `plots/` – saved charts
+
+## Quick start
+```bash
+pip install -r requirements.txt
+python -m src.simulate --n_sims 20000 --lambda_f 12 --mu 9.0 --sigma 1.0
+python -m src.make_plots
+```
+
+## Outputs you can talk through
+- **Expected annual loss** (mean of simulated aggregate losses)
+- **VaR / TVaR** at 95% and 99% (tail risk)
+- Shape + heaviness of tail via the tail histogram
+
+## Notes
+- Parameters are easy to swap to test different lines of business (higher frequency / heavier tail).
+- Next improvements: fit parameters from real data, add reinsurance layers, add inflation/trend.
